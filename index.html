@@ -12,7 +12,7 @@
 <body>
     <script>
         const p = new Promise((resolve, reject) => {
-            resolve('I am so cool and fun!')
+            resolve('I am so 🆒 and 🤪!')
         })
         p.then(data => {
             console.log(data)
@@ -33,21 +33,55 @@
         function getPostById(postId) {
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
-                    const cPost = posts.find(pst => pst.id === postId)
-                    if(cPost){
-                        resolve(cPost)
+                    const postDetails = posts.find(pst => pst.id === postId)
+                    if(postDetails){
+                        resolve(postDetails)
                     } else {
-                        reject(Error('Entered PostId is not avail'))
+                        reject(Error('Entered PostId is not avail🤔'))
                     }
                 }, 0);
             })
         }
+
+        function hydrateAuthor(objPost) {
+            return new Promise ((resolve, reject) => {
+                const authorDetails = authors.find(auth => auth.name === objPost.author)
+                if (authorDetails) {
+                    resolve(authorDetails)
+                } else {
+                    reject(Error('Author not Available🤔'))
+                }
+            });
+        }
+        
+        /*
         getPostById(2)
             .then((result) => {
                 console.log(result)
+                hydrateAuthor(result)
+                    .then(resultAuth => {
+                        console.log(resultAuth)
+                    })
+                    .catch(errAuth => {
+                        console.log(errAuth)
+                    })
             }).catch((err) => {
                 console.log(err);
             });
+            */
+
+        // Chaining Promises
+        getPostById(2)
+            .then(post => {
+                console.log('😎', post)
+                return hydrateAuthor(post)
+            })
+            .then(author => {
+                console.log('👨‍', author)
+            })
+            .catch(err => {
+                console.error('😡', err)
+            })
 
     </script>
 
