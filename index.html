@@ -54,7 +54,8 @@
             });
         }
         
-        /*
+        
+        /* 
         getPostById(2)
             .then((result) => {
                 console.log(result)
@@ -68,7 +69,8 @@
             }).catch((err) => {
                 console.log(err);
             });
-            */
+        */
+        
 
         // Chaining Promises
         getPostById(2)
@@ -82,6 +84,38 @@
             .catch(err => {
                 console.error('😡', err)
             })
+
+        //Multiple Promises
+        const weather = new Promise(resolve => {
+            setTimeout(() => {
+                resolve({remp: 29, condition: 'Sunny🌞 with clouds☁️'})
+            }, 2000);
+        })
+
+        const tweets = new Promise(resolve => {
+            resolve(['I ❤️ 🍰', '🌭 is good too✨'])
+            
+        })
+        Promise
+            .all([weather, tweets])
+            .then(responses => {
+                const [wthr, twks] = responses
+                console.log(wthr,twks)
+            })
+        
+
+        const postsPromise = fetch('https://wesbos.com/wp-json/wp/v2/posts')
+        const streetCarsPromise = fetch('https://data.ratp.fr/api/datasets/1.0/search/?q=paris')
+        Promise
+            .all([postsPromise, streetCarsPromise])
+            .then(responses => {
+               return Promise.all(responses.map(res => res.json()))
+            })
+            .then(data => {
+                const [wesPost, streetCars] = data
+                console.log(wesPost, streetCars)
+            })
+
 
     </script>
 
