@@ -6,61 +6,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
 </head>
 
 <body>
-    <!-- Init Arrow samples 
     <script>
-        const names = ['wes', 'kait', 'lux'];
-
-        const fullNames = names.map(function (nam) {
-            return `${nam} bos`;
+        const p = new Promise((resolve, reject) => {
+            resolve('I am so cool and fun!')
         })
-
-        const fullNames1 = names.map(nam => {
-            return `${nam} bos`;
+        p.then(data => {
+            console.log(data)
         })
+        ///
+        //
+        const posts = [
+            { title: 'I love JavaScript', author: 'Wes Bos', id: 1 },
+            { title: 'CSS!', author: 'Chris Coyier', id: 2 },
+            { title: 'Dev tools tricks', author: 'Addy Osmani', id: 3 },
+        ];
+        const authors = [
+            { name: 'Wes Bos', twitter: '@wesbos', bio: 'Canadian Developer' },
+            { name: 'Chris Coyier', twitter: '@chriscoyier', bio: 'CSS Tricks and CodePen' },
+            { name: 'Addy Osmani', twitter: '@addyosmani', bio: 'Googler' },
+        ];
 
-        const fullNames2 = names.map(nam => `${nam} bos`);
-
-        const sayMyName = (title) => {
-            alert(`the title is ${title}`)
+        function getPostById(postId) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    const cPost = posts.find(pst => pst.id === postId)
+                    if(cPost){
+                        resolve(cPost)
+                    } else {
+                        reject(Error('Entered PostId is not avail'))
+                    }
+                }, 0);
+            })
         }
+        getPostById(2)
+            .then((result) => {
+                console.log(result)
+            }).catch((err) => {
+                console.log(err);
+            });
 
-        sayMyName('Sample');
-
-        console.log(fullNames2);
-    </script>
-    -->
-
-    <!-- Second Set Samples 
-    <script>
-        const race = '100m Dash';
-        const winners = ['Hunter Gath', 'singa Song', 'Imda Bos'];
-
-        const win = winners.map((obj, i) => ({
-            name: obj,
-            race,
-            place: i
-        }));
-
-        const ages = [65,23,11,24,76,89,5,12,87,14];
-        const old = ages.filter(age => age >= 60);
-        console.log(old);
-
-    </script>
-
-    -->
-
-    <!-- Test Samples -->
-    <script>
-        function tipCalc({ total = 30, tip = 1, tax = 2 } = {}) {
-            return total + tip + tax;
-        }
-
-        console.log(tipCalc({ total: 20 }));//23
-        // console.log(tipCalc(10)); //13;
-        // console.log(tipCalc(10, 2, 3)); //15
     </script>
 
 </body>
